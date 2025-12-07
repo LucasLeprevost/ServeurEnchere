@@ -76,9 +76,22 @@ public class GerantDeClient implements Runnable
 
 			while ((messageRecu = this.in.readLine()) != null) 
 			{
+				
 				System.out.println("[" + this.nomClient + "]: " + messageRecu);	
-				String message = this.nomClient + ": " + messageRecu;
-				this.diffuser(message);
+				try 
+				{
+					int prix = Integer.parseInt(messageRecu);
+					boolean resultat = ServeurSimple.gerantEnchere.soumettreEnchere(this.nomClient, prix);
+					
+					if (!resultat) 
+						this.out.println("Votre enchère est trop basse ou la vente est close !");
+					
+				
+				} catch (NumberFormatException e) {
+					this.out.println("Veuillez entrer un nombre entier pour enchérir.");
+				}
+				
+			
 			}
 
 		} catch (IOException e) {

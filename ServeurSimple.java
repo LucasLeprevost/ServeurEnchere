@@ -1,22 +1,21 @@
 
 import java.net.*;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class ServeurSimple 
 {
 	public static ArrayList<GerantDeClient> lstGerantCli = new ArrayList<>();
-	public ArrayList<Enchere> lstEnchere = new ArrayList<>();
+	public static GerantEnchere gerantEnchere;
 
 	public ServeurSimple(int port) 
 	{
-		this.lstEnchere = ServeurSimple.genererEnchere();
-		Collections.shuffle(this.lstEnchere);
+		ArrayList<Enchere> lstEnchere = ServeurSimple.genererEnchere();
+
+		this.gerantEnchere = new GerantEnchere(lstEnchere);
+		new Thread(this.gerantEnchere).start();
 
 		try 
 		{
-			Enchere enchere;
-			
 			ServerSocket serverSocket = new ServerSocket(port);
 			System.out.println("Serveur démarré sur le port " + port + ", en attente de clients...");
 
