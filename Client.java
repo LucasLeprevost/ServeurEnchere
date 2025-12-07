@@ -22,7 +22,7 @@ public class Client
 		}).start();
 
 		PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8),true);
-		Scanner scanner = new Scanner(System.in);
+		Scanner scanner = new Scanner(System.in,StandardCharsets.UTF_8);
 		while (scanner.hasNextLine()) 
 		{
 			out.println(scanner.nextLine());

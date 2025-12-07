@@ -40,7 +40,7 @@ public class GerantEnchere implements Runnable
 		while (!this.lstEnchere.isEmpty())
 		{
 			this.genererEnchere();
-			this.diffuser("Nouvel enchère : " + this.enchereActuelle.getNom() + " à " + this.enchereActuelle.getMontant() + "€");
+			this.diffuser("Nouvel enchère : " + this.enchereActuelle.getNom() + " à " + this.enchereActuelle.getMontant() + " euros");
 
 			while (!this.objetVendu) 
 			{
@@ -50,12 +50,12 @@ public class GerantEnchere implements Runnable
 					this.timer++;
 					
 					if (this.timer == 10) 
-						diffuser("Une fois... (Prix : " + enchereActuelle.getMontant() + "€)");
+						diffuser("Une fois... (Prix : " + enchereActuelle.getMontant() + " euros pour " + this.enchereActuelle.getNom() +")");
 					else if (this.timer == 20) 
-						diffuser("Deux fois... (Prix : " + enchereActuelle.getMontant() + "€)");
+						diffuser("Deux fois... (Prix : " + enchereActuelle.getMontant() +  " euros pour " + this.enchereActuelle.getNom() +")");
 					else if (this.timer == 30) 
 					{
-						diffuser("ADJUGÉ vendu à " + enchereActuelle.getNomClient() + " pour " + enchereActuelle.getMontant() + "€ !!");
+						diffuser("ADJUGÉ vendu à " + enchereActuelle.getNomClient() + " pour " + enchereActuelle.getMontant() + " euros !!");
 						this.objetVendu = true;
 					}
 
@@ -102,7 +102,7 @@ public class GerantEnchere implements Runnable
             
             this.timer = 0;
             
-            diffuser("Nouvelle enchère de " + nomClient + " : " + montant + "€");
+            diffuser("Nouvelle enchère de " + nomClient + " : " + montant + "euros");
             return true;
         }
         return false;
