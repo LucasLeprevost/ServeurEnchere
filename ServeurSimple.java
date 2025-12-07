@@ -12,7 +12,6 @@ public class ServeurSimple
 		ArrayList<Enchere> lstEnchere = ServeurSimple.genererEnchere();
 
 		this.gerantEnchere = new GerantEnchere(lstEnchere);
-		new Thread(this.gerantEnchere).start();
 
 		try 
 		{
@@ -29,6 +28,9 @@ public class ServeurSimple
 
 				Thread tgdc = new Thread(gdc);
 				tgdc.start();
+
+				new Thread(this.gerantEnchere).start();
+
 			}
 
 		} catch (Exception e) 
