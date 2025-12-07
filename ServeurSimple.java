@@ -16,6 +16,7 @@ public class ServeurSimple
 		try 
 		{
 			Enchere enchere;
+			
 			ServerSocket serverSocket = new ServerSocket(port);
 			System.out.println("Serveur démarré sur le port " + port + ", en attente de clients...");
 

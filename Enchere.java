@@ -5,6 +5,7 @@ public class Enchere
 	private String nom;
 	private int montant;
 	private String nomClient;
+	private Boolean vendue;
 	
 	public Enchere (String nom, int montant)
 	{
@@ -17,6 +18,7 @@ public class Enchere
 	public String getNom() {return nom;}
 	public int getMontant() {return montant;}
 	public String getNomClient() {return nomClient;}
+	public boolean getVendue(){return this.vendue;}
 
 
 	public void setNomClient(String nom)
@@ -27,6 +29,11 @@ public class Enchere
 	public void setMontant (int montant)
 	{
 		this.montant =montant;
+	}
+
+	public void setVendue(boolean vendue)
+	{
+		this.vendue = vendue;
 	}
 	
 }
