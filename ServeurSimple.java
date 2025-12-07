@@ -12,13 +12,16 @@ public class ServeurSimple
 		ArrayList<Enchere> lstEnchere = ServeurSimple.genererEnchere();
 
 		ServeurSimple.gerantEnchere = new GerantEnchere(lstEnchere);
-		new Thread(this.gerantEnchere).start();
+		
 
 		try 
 		{
 			ServerSocket serverSocket = new ServerSocket(port);
 			System.out.println("Serveur démarré sur le port " + port + ", en attente de clients...");
 
+			Thread.sleep(2000);
+			new Thread(this.gerantEnchere).start();
+			
 			while (true) 
 			{
 				Socket s = serverSocket.accept();

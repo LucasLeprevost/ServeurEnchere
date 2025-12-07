@@ -1,6 +1,7 @@
 
 import java.io.*;
 import java.net.*;
+import java.nio.charset.StandardCharsets;
 
 public class GerantDeClient implements Runnable 
 {
@@ -14,8 +15,8 @@ public class GerantDeClient implements Runnable
 		this.socket = socket;
 		try 
 		{
-			this.in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
-			this.out = new PrintWriter(this.socket.getOutputStream(), true);
+			this.in = new BufferedReader(new InputStreamReader(this.socket.getInputStream(),StandardCharsets.UTF_8));
+			this.out = new PrintWriter(new OutputStreamWriter(this.socket.getOutputStream(),StandardCharsets.UTF_8) ,true);
 		} catch (Exception e) 
 		{
 			System.out.println("Problème lors de l'initialisation du client");

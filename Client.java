@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class Client 
@@ -12,7 +13,7 @@ public class Client
 		{
 			try 
 			{
-				BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+				BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream(),StandardCharsets.UTF_8));
 				String msg;
 				while ((msg = in.readLine()) != null) 
 					System.out.println(msg);
@@ -20,7 +21,7 @@ public class Client
 			catch (IOException e) {}
 		}).start();
 
-		PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+		PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8),true);
 		Scanner scanner = new Scanner(System.in);
 		while (scanner.hasNextLine()) 
 		{
