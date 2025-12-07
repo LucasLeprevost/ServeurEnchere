@@ -3,6 +3,11 @@ import java.net.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
+
+/**
+ * Interface utilisateur console gérant l'envoi et la réception de messages.
+ * Utilise deux threads pour la lecture (Socket) et l'écriture (Clavier) simultanées.
+ */
 public class Client 
 {
 	public static void main(String[] args) throws Exception 
@@ -23,6 +28,8 @@ public class Client
 
 		PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8),true);
 		Scanner scanner = new Scanner(System.in,StandardCharsets.UTF_8);
+
+		
 		while (scanner.hasNextLine()) 
 		{
 			out.println(scanner.nextLine());

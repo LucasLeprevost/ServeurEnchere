@@ -2,6 +2,11 @@
 import java.util.ArrayList;
 import java.util.Collections;
 
+
+/**
+ * Pilote la logique du jeu : chronomètre, rotation des objets et validation des offres.
+ * Diffuse l'état de la vente à tous les clients connectés.
+ */
 public class GerantEnchere implements Runnable
 {
 	private ArrayList<Enchere> lstEnchere;
@@ -14,6 +19,11 @@ public class GerantEnchere implements Runnable
 		this.lstEnchere = encheres;
 	}
 
+
+	/**
+     * Boucle principale du jeu qui gère l'attente des joueurs et le timer des ventes.
+     * Passe à l'objet suivant quand le timer atteint 30 secondes.
+     */
 	@Override
 	public void run() 
 	{
@@ -34,8 +44,6 @@ public class GerantEnchere implements Runnable
 			e.printStackTrace();
 		}
 
-			
-	
 
 		while (!this.lstEnchere.isEmpty())
 		{
@@ -70,6 +78,11 @@ public class GerantEnchere implements Runnable
 		}
 	}
 
+
+	/**
+     * Sélectionne aléatoirement le prochain objet dans la liste.
+     * Retire l'objet sélectionné pour qu'il ne soit pas revendu.
+     */
 	public void genererEnchere()
 	{
 		Collections.shuffle(this.lstEnchere);
@@ -77,7 +90,10 @@ public class GerantEnchere implements Runnable
 		this.lstEnchere.remove(this.enchereActuelle);
 	} 
 
-
+	/**
+     * Envoie un message informatif à l'ensemble des clients connectés.
+     * Utilise la liste statique de ServeurSimple.
+     */
 	public void diffuser(String message) 
 	{
 		System.out.println(message);
@@ -88,8 +104,10 @@ public class GerantEnchere implements Runnable
 			
 		}
 	}
-
-
+	
+	/** 
+	* Si l'offre est valide, met à jour le prix et réinitialise le timer.
+     */
 	public boolean soumettreEnchere(String nomClient, int montant) 
 	{
         if (enchereActuelle == null || objetVendu) 

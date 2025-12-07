@@ -12,12 +12,13 @@ public class Enchere
 		this.montant = montant;
 	}
 
+// --- Getters ---
 	public String getNom() {return nom;}
 	public int getMontant() {return montant;}
 	public String getNomClient() {return nomClient;}
 	public boolean getVendue(){return this.vendue;}
 
-
+// --- Setters ---
 	public void setNomClient(String nom)
 	{
 		this.nomClient = nom;

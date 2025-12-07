@@ -2,6 +2,11 @@
 import java.net.*;
 import java.util.ArrayList;
 
+
+/**
+ * Point d'entrée du serveur qui accepte les connexions TCP entrantes.
+ * Initialise le gestionnaire d'enchères et lance les threads clients.
+ */
 public class ServeurSimple 
 {
 	public static ArrayList<GerantDeClient> lstGerantCli = new ArrayList<>();
@@ -21,7 +26,7 @@ public class ServeurSimple
 
 			Thread.sleep(2000);
 			new Thread(this.gerantEnchere).start();
-			
+
 			while (true) 
 			{
 				Socket s = serverSocket.accept();
@@ -39,6 +44,10 @@ public class ServeurSimple
 		}
 	}
 
+	/**
+     * Génère une liste prédéfinie d'objets pour la vente.
+     * Retourne une ArrayList d'objets Enchere.
+     */
 	public static ArrayList<Enchere> genererEnchere()
 	{
         ArrayList<Enchere> liste = new ArrayList<>();

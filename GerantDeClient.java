@@ -3,6 +3,11 @@ import java.io.*;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
 
+
+/**
+ * Gère la communication réseau avec un client spécifique via Sockets.
+ * Réceptionne les messages et les transmet au gestionnaire d'enchères.
+ */
 public class GerantDeClient implements Runnable 
 {
 	private Socket socket;
@@ -23,7 +28,10 @@ public class GerantDeClient implements Runnable
 		}
 	}
 	
-	
+	/**
+     * Envoie un message à tous les autres clients connectés.
+     * Parcourt la liste statique des gérants pour diffuser l'information.
+     */
 	public void diffuser(String message) 
 	{
 		for (int i = 0; i < ServeurSimple.lstGerantCli.size(); i++) 
@@ -36,6 +44,11 @@ public class GerantDeClient implements Runnable
 		}
 	}
 
+
+	/**
+     * Demande et valide le nom de l'utilisateur à la connexion.
+     * Boucle tant que le nom reçu est vide ou null.
+     */
 	public String demanderNom() 
 	{
 		String nom = "";
@@ -54,6 +67,10 @@ public class GerantDeClient implements Runnable
 		return nom;
 	}
 
+	/**
+     * Boucle principale du thread client : gestion connexion, messages et déconnexion.
+     * Analyse si le message est une enchère numérique et contacte GerantEnchere.
+     */
 	@Override
 	public void run() 
 	{
@@ -104,6 +121,11 @@ public class GerantDeClient implements Runnable
 		}
 	}
 
+
+	/**
+     * Nettoie proprement la connexion lors du départ d'un client.
+     * Retire le client de la liste et informe les autres.
+     */
 	private void fermerConnexion() 
 	{
 		try 
