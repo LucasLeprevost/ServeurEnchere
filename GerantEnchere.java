@@ -6,7 +6,7 @@ public class GerantEnchere implements Runnable
 {
 	private ArrayList<Enchere> lstEnchere;
 	private Enchere enchereActuelle;
-	private int timer = 0; 
+	private int timer ; 
 	private boolean objetVendu = false;
 
 	public GerantEnchere (ArrayList<Enchere> encheres)
@@ -17,36 +17,57 @@ public class GerantEnchere implements Runnable
 	@Override
 	public void run() 
 	{
-	
-		this.genererEnchere();	
-		this.timer = 0;
-		this.objetVendu = false;
-		
-		this.diffuser("NOUVEL OBJET : " + this.enchereActuelle.getNom() + " à " + this.enchereActuelle.getMontant() + "€");
+		System.out.println("Les enchères sont prêtes a commencer , en attente de clients.");
 
-		while (!this.objetVendu) 
+		while (ServeurSimple.lstGerantCli.isEmpty()) 
 		{
-			try 
-			{
-				Thread.sleep(1000); 
-				this.timer++;
-				
-				if (this.timer == 10) 
-					diffuser("Une fois... (Prix : " + enchereActuelle.getMontant() + "€)");
-				else if (this.timer == 20) 
-					diffuser("Deux fois... (Prix : " + enchereActuelle.getMontant() + "€)");
-				else if (this.timer == 30) 
-				{
-					diffuser("ADJUGÉ vendu à " + enchereActuelle.getNomClient() + " pour " + enchereActuelle.getMontant() + "€ !!");
-					this.objetVendu = true;
-				}
+            try {
+                Thread.sleep(1000); 
+            } catch (InterruptedException e) 
+			{ e.printStackTrace(); }
+        }
 
-			} catch (InterruptedException ex) {
-				ex.printStackTrace();
-			}
+		System.out.println("Un client est arrivé, les enchères vont commencer dans 4 secondes.");
+		try {
+			Thread.sleep(4000);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+
+			
 	
-		diffuser("La vente est terminée.");
+
+		while (!this.lstEnchere.isEmpty())
+		{
+			this.genererEnchere();
+			this.diffuser("Nouvel enchère : " + this.enchereActuelle.getNom() + " à " + this.enchereActuelle.getMontant() + "€");
+
+			while (!this.objetVendu) 
+			{
+				try 
+				{
+					Thread.sleep(1000); 
+					this.timer++;
+					
+					if (this.timer == 10) 
+						diffuser("Une fois... (Prix : " + enchereActuelle.getMontant() + "€)");
+					else if (this.timer == 20) 
+						diffuser("Deux fois... (Prix : " + enchereActuelle.getMontant() + "€)");
+					else if (this.timer == 30) 
+					{
+						diffuser("ADJUGÉ vendu à " + enchereActuelle.getNomClient() + " pour " + enchereActuelle.getMontant() + "€ !!");
+						this.objetVendu = true;
+					}
+
+				} catch (InterruptedException ex) {
+					ex.printStackTrace();
+				}
+			}
+		
+			diffuser("La vente est terminée.");
+			this.timer = 0;
+			this.objetVendu = false;
+		}
 	}
 
 	public void genererEnchere()

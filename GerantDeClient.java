@@ -65,6 +65,7 @@ public class GerantDeClient implements Runnable
 				this.socket.close();
 				return;
 			}
+			ServeurSimple.lstGerantCli.add(this);
 
 			System.out.println("Un nouveau client est connecté : " + this.nomClient);
 			this.out.println("Bienvenue " + this.nomClient);
